@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eğlenceli Öğrenme Paneli</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles/theme.css">
+    <style>
+        .panel-container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .side-nav {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+
+        .nav-item {
+            padding: 1rem 1.5rem;
+            margin: 0.5rem 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .nav-item:hover {
+            background: rgba(108, 141, 250, 0.1);
+            transform: translateX(8px);
+        }
+
+        .nav-item::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-item:hover::before {
+            opacity: 1;
+        }
+
+        .page-content {
+            display: none;
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .progress-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+
+        /* Responsive Tasarım */
+        @media (max-width: 768px) {
+            .panel-container {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+            }
+            
+            .side-nav {
+                position: static;
+                margin-bottom: 20px;
+            }
+            
+            .nav-item {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">🌟 Eğlenceli Öğrenme</h1>
+        <p style="opacity: 0.9; font-size: 1.1rem;">Merhaba <strong>Ayşe</strong>! Bugünkü hedeflerini tamamladın mı? 🚀</p>
+    </header>
+
+    <div class="panel-container">
+        <nav class="side-nav">
+            <div class="nav-item" onclick="showPage('ana-sayfa')">
+                🏠 Ana Sayfa
+            </div>
+            <div class="nav-item" onclick="showPage('oyunlar')">
+                🎮 Oyunlar
+            </div>
+            <div class="nav-item" onclick="showPage('notlar')">
+                📊 İlerleme
+            </div>
+            <div class="nav-item" onclick="showPage('ders-programi')">
+                📅 Program
+            </div>
+        </nav>
+
+        <div id="ana-sayfa" class="page-content active-page">
+            <div class="stats-grid">
+                <div class="card">
+                    <h2 style="margin-bottom: 1.5rem;">📈 Genel İlerleme</h2>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 78%"></div>
+                    </div>
+                    <div style="margin-top: 1.5rem; display: grid; gap: 1rem;">
+                        <div>
+                            <span>Matematik</span>
+                            <div class="star-rating">★★★★☆</div>
+                        </div>
+                        <div>
+                            <span>Türkçe</span>
+                            <div class="star-rating">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 style="margin-bottom: 1.5rem;">🏆 Son Başarılar</h2>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span class="badge">⭐ Matematik Ustası</span>
+                        <span class="badge">📖 Okuma Şampiyonu</span>
+                        <span class="badge">🔬 Bilim Kaşifi</span>
+                    </div>
+                    <div style="margin-top: 2rem;">
+                        <div class="floating-emoji">🎉</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="oyunlar" class="page-content">
+            <div class="game-grid">
+                <div class="card">
+                    <h2>Matematik Macerası</h2>
+                    <p>Toplama ve çıkarma ile heyecanlı bir yolculuk!</p>
+                    <button class="button">Oyna</button>
+                </div>
+                <div class="card">
+                    <h2>Kelime Avı</h2>
+                    <p>Harfleri birleştir, kelimeleri yakala!</p>
+                    <button class="button">Oyna</button>
+                </div>
+                <div class="card">
+                    <h2>Bilim Laboratuvarı</h2>
+                    <p>Deneylerle bilimi keşfet! 🔬</p>
+                    <button class="button">Keşfet</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="notlar" class="page-content">
+            <div class="game-grid">
+                <div class="card">
+                    <h2>📊 Genel İlerleme</h2>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 65%"></div>
+                        </div>
+                        <p>Toplam Tamamlanma: 65%</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>📅 Son Testler</h2>
+                    <ul class="test-list">
+                        <li>Matematik: 85 ⭐⭐⭐</li>
+                        <li>Türkçe: 92 ⭐⭐⭐⭐</li>
+                        <li>Fen Bilgisi: 78 ⭐⭐</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="ders-programi" class="page-content">
+            <div class="game-grid">
+                <div class="card">
+                    <h2>📅 Haftalık Program</h2>
+                    <table class="schedule">
+                        <tr>
+                            <th>Pazartesi</th>
+                            <td>Matematik 🧮</td>
+                            <td>Türkçe 📖</td>
+                        </tr>
+                        <tr>
+                            <th>Salı</th>
+                            <td>Fen Bilgisi 🔬</td>
+                            <td>Resim 🎨</td>
+                        </tr>
+                        <tr>
+                            <th>Çarşamba</th>
+                            <td>Müzik 🎵</td>
+                            <td>Beden Eğitimi ⚽</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card">
+                    <h2>🎯 Bugünün Hedefleri</h2>
+                    <ul class="goals">
+                        <li>✅ 10 matematik sorusu çöz</li>
+                        <li>📗 1 hikaye kitabı oku</li>
+                        <li>🎨 Resim defterini güncelle</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p style="margin: 0; font-weight: 500;">© 2024 Eğlenceli Öğrenme | 🚀 Her çocuk bir dahidir!</p>
+    </footer>
+
+    <script>
+        // Gelişmiş sayfa yönetim script'i
+        const pageHistory = [];
+        
+        function showPage(pageId) {
+            const currentPage = document.querySelector('.active-page');
+            if(currentPage) {
+                currentPage.classList.add('page-exit');
+                setTimeout(() => {
+                    currentPage.classList.remove('active-page', 'page-exit');
+                }, 400);
+            }
+            
+            const newPage = document.getElementById(pageId);
+            newPage.classList.add('active-page');
+            pageHistory.push(pageId);
+            
+            // Başlık güncelleme
+            document.title = `${newPage.querySelector('h2').textContent} | Eğlenceli Öğrenme`;
+        }
+    </script>
+</body>
+</html> 
